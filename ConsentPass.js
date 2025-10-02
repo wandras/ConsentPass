@@ -140,7 +140,7 @@ wa.ConsentPass = wa.ConsentPass || class ConsentPass {
         return this.consents[type]?.value;
     }
     getConsentByCode(code) {
-        // get Onetrust consent by type (e.g. 'STRICTLY_NECESSARY'), returns true/false if set, undefined otherwise
+        // get Onetrust consent by type (e.g. 'C0001'), returns true/false if set, undefined otherwise
 		var type = this.getConsentTypeByCode(code);
         return this.getConsent(type);
     }
