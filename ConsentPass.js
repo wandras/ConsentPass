@@ -18,6 +18,7 @@ wa.ConsentPass = wa.ConsentPass || class ConsentPass {
     static instance;
     #codeToType;
     #logStyle;
+    #dataLayer;
     
     constructor() {
         // single instance:
@@ -58,8 +59,8 @@ wa.ConsentPass = wa.ConsentPass || class ConsentPass {
         
         var self = this; // reference to the local scope, for injection purposes
 
-        // reference the consents in flat properties of utag_data:
-        Object.defineProperties(window.utag_data, {
+        // reference the consents in flat properties of this.#dataLayer:
+        Object.defineProperties(this.#dataLayer, {
             consent_strictly_necessary: {
                 get() {
                     return self.consents.STRICTLY_NECESSARY.value;
@@ -90,10 +91,13 @@ wa.ConsentPass = wa.ConsentPass || class ConsentPass {
             }
         });
         
-        // populate this.consents with data (consents are also saved into utag_data);
+        // populate this.consents with data (consents are also saved into this.#dataLayer);
 		// this.consents is automatically updated at each change:
 		this.#refreshConsents();
 	}
+    setDataLayer(dataLayer) {
+        this.#dataLayer = dataLayer || window.utag_data;
+    }
     runWithConsent(type, callback) {
         // run the callback if the consent specified has been accepted, or schedule it at the acceptance
         // receives the consent type (e.g. 'STRICTLY_NECESSARY') and the callback
