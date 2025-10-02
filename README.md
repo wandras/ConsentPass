@@ -24,7 +24,6 @@ Optionally, set a custom data layer:
 wa.consentPass.setDataLayer(window.utag_data);
 
 Available methods
-
 runWithConsent(type, callback): executes or queues a callback based on consent
 getConsents(): returns an object with current consent values
 getConsent(type): returns true/false if a specific consent type is accepted
@@ -37,3 +36,4 @@ fetchConsents(): reads consents directly from the OneTrust cookie
 
 License
 MIT License
+
